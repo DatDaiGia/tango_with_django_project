@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+admin.autodiscover()
 from django.conf.urls.static import static
 from rango import views
 from tango_with_django_project import views

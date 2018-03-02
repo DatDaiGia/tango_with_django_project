@@ -10,9 +10,9 @@
 <div class="row-fluid">
     <div class="span6">
         <h2>Top Five Categories</h2>
-        {% if categories %}
+        {% if cat_list %}
         <ul>
-            {% for category in categories %}
+            {% for category in cat_list %}
             <li><a href="/rango/category/{{category.slug}}">{{ category.name }}</a></li>
             {% endfor %}
         </ul>

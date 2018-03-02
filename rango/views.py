@@ -8,12 +8,13 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.contrib.auth.models import User
 
 def index(request):
   request.session.set_test_cookie()
   context = RequestContext(request)
-  category_list = Category.objects.order_by('-likes')[:5]
-  context_dict = {'categories': category_list}
+  cat_list = get_category_list()
+  context_dict = {'cat_list': cat_list}
 
   if request.session.get('last_visit'):
       last_visit_time = request.session.get('last_visit')
@@ -146,3 +147,40 @@ def restricted(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/rango/')
+
+def get_category_list():
+    cat_list = Category.objects.all()
+    return cat_list
+
+@login_required
+def profile(request):
+    context = RequestContext(request)
+    cat_list = get_category_list()
+    context_dict = {'cat_list': cat_list}
+    u = User.objects.get(username=request.user)
+
+    try:
+        up = UserProfile.objects.get(user=u)
+    except:
+        up = None
+
+    context_dict['user'] = u
+    context_dict['userprofile'] = up
+    return render_to_response('rango/profile.html', context_dict, context)
+
+def track_url(request):
+    context = RequestContext(request)
+    page_id = None
+    url = '/rango/'
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views = page.views + 1
+                page.save()
+                url = page.url
+            except:
+                pass
+
+    return redirect(url)

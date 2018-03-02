@@ -26,6 +26,7 @@
                   <ul class="nav pull-right">
                       {% if user.is_authenticated %}
                       <li class="navbar-text">Welcome, {{ user.username }}!</li>
+                      <li><a href="/rango/profile">Profile</a></li>
                       <li><a href="/rango/logout/">Logout</a></li>
                       {% else %}
                       <li><a href="/rango/register/">Register</a></li>
@@ -47,6 +48,14 @@
         <div class="row-fluid">
             <div class="span3">
                 <div class="well sidebar-nav">
+                   {% block sidebar %}
+                   {% endblock %}
+                   <div id="cats">
+                     {% if cat_list %}
+                         <ul class="nav nav-list"><li>Category List</li></ul>
+                         {% include 'rango/category_list.html' with cat_list=cat_list %}
+                     {% endif %}
+                  </div>
                 </div>
             </div>
             <div class="span9">
