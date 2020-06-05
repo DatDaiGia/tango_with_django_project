@@ -1,4 +1,4 @@
-Django==1.7.11
+Django==1.11.29
 PAM==0.4.2
 Pillow==2.3.0
 PyYAML==3.12
