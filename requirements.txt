@@ -30,7 +30,7 @@ httplib2==0.8
 ipaddress==1.0.18
 jsonschema==2.6.0
 lockfile==0.8
-lxml==3.3.3
+lxml==4.6.2
 oauthlib==0.6.1
 oneconf==0.3.7.14.04.1
 paramiko==1.10.1
