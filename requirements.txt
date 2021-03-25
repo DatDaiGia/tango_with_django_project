@@ -1,7 +1,7 @@
 Django==1.7.11
 PAM==0.4.2
 Pillow==2.3.0
-PyYAML==3.12
+PyYAML==5.4
 Twisted-Core==13.2.0
 Twisted-Web==13.2.0
 adium-theme-ubuntu==0.3.4
